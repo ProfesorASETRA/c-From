@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _1secimkutusu
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //txtbx3 ve lbl3 ü gizleyelim
+            label3.Visible= false;
+            textBox3.Visible= false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        { // sevimkutusu, seçimi değişti
+          // seçildi mi? seçimde çıkarıldı mı ?
+
+            if (checkBox1.Checked)
+            {// seçildi, txtbx3 ve lbl3 görünür yap, etkinleştir
+                label3.Visible = true;
+                textBox3.Visible = true;
+                label3.Enabled = true;
+                textBox3.Enabled = true;
+
+            }
+            else
+            {//seçimden çıkarıldı ve txtbx3 ve lbl3 gizle
+                // etkisileştir
+                label3.Visible = false;
+                textBox3.Visible = false;
+                label3.Enabled = false;
+                textBox3.Enabled = false;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double fiyat, kdv, satisFiyat, indirim, tutar;
+            fiyat = kdv = satisFiyat = indirim = tutar = 0.0;
+            try
+            {
+                fiyat = double.Parse(textBox1.Text);
+                kdv = double.Parse(textBox2.Text);
+                //Eğer secimkutusu seçiliyse txtbx3 ü doublea hecele
+               
+                indirim = double.Parse(textBox3.Text);  
+            }
+            catch (Exception istisna)
+            {
+                MessageBox.Show(istisna.Message, istisna.Source);
+            }
+            satisFiyat = fiyat + fiyat * kdv / 100.0;
+            tutar = satisFiyat - satisFiyat * indirim / 100.0;
+            label4.Text = tutar.ToString();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {// secumkutusu seçimi değişti, seçildi mi seçimden çıkarıldı mı?
+            if (checkBox2.Checked)
+            {// buton2 yi etkinleştir
+                button2.Enabled = true;
+
+            }
+            else
+            {//seçimden çıkarıldı butonu etkinsizleştir
+                button2.Enabled=false;
+            }
+
+        }
+    }
+}
